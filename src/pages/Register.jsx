@@ -2,13 +2,23 @@ import { Link } from "react-router-dom";
 
 
 const Register = () => {
+    const handleRegisterSubmit=(event)=>{
+        event.preventDefault();
+        const form=new FormData(event.target);
+        const name=form.get('name')
+        const email=form.get('email')
+        const photo=form.get('photo')
+        const password=form.get('password')
+        console.log({name,email,photo,password});
+
+    }
     return (
         
               <div className="flex justify-center items-center min-h-screen">
                     <div className="card bg-base-100 w-full max-w-xl shrink-0 rounded-none p-10">
                         <h2 className="text-center text-2xl py-2 mt-4 font-semibold">Registration Your Account</h2>
                         <span className="underline "></span>
-                  <form className="card-body">
+                  <form onSubmit={handleRegisterSubmit} className="card-body">
                   <div className="form-control">
                       <label className="label">
                         <span className="label-text">Name</span>
