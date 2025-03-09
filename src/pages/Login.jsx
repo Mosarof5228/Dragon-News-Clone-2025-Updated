@@ -1,15 +1,18 @@
+import { useContext } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../Provider/AuthProvider";
 
 
 
 const Login = () => {
+  const {createUser,setUser}=useContext(AuthContext);
   const handleLoginSubmit=(event)=>{
     event.preventDefault();
     const form=new FormData(event.target);
     const email=form.get('email');
     const password=form.get('password');
     console.log({email,password});
-
+   
   }
     return (
         <div className="flex justify-center items-center min-h-screen">
