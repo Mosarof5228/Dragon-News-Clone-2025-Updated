@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { Link, useLocation, useNavigate, } from "react-router-dom";
 import { AuthContext } from "../Provider/AuthProvider";
 
@@ -6,6 +6,7 @@ import { AuthContext } from "../Provider/AuthProvider";
 
 const Login = () => {
   const {setUser,loginUser}=useContext(AuthContext);
+  const [error,setError]=useState({});
 
 const location=useLocation();
 const navigate=useNavigate();
@@ -25,10 +26,10 @@ console.log(location);
      
 
     })
-    .catch((error) => {
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      console.log({errorCode,errorMessage});
+    .catch((err) => {
+     setError({...error,login:err.code});
+
+      
     });
   
 
@@ -51,6 +52,9 @@ console.log(location);
             <span className="label-text">Password</span>
           </label>
           <input type="password" name='password' placeholder="password" className="input input-bordered" required />
+          {
+            error.login && <label className="text-red-500 py-2 text-sm">{error.login}</label>
+          }
           <label className="label">
             <a href="#" className="label-text-alt link link-hover">Forgot password?</a>
           </label>
